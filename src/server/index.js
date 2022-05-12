@@ -1,5 +1,5 @@
-// const dotenv = require("dotenv");
-// dotenv.config();
+const dotenv = require("dotenv");
+dotenv.config();
 const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
@@ -28,8 +28,7 @@ app.get('/', function (req, res) {
 });
 
 app.post('/placeInfo', async function (req, res) {
-	console.log('Here inside /placeInfo route in backend. The city is: ', req.body.nameOfPlace);
-	const response = await fetch(`http://api.geonames.org/searchJSON?q=${req.body.nameOfPlace}&maxRows=1&username=av_dyane`);
+	const response = await fetch(`http://api.geonames.org/searchJSON?q=${req.body.nameOfPlace}&maxRows=1&username=${process.env.GEONAMES_USERNAME}`);
 	const data = await response.json();
 	try {
 		placeData = {
@@ -37,7 +36,8 @@ app.post('/placeInfo', async function (req, res) {
 			longitude: data.geonames[0].lng,
 			country: data.geonames[0].countryName
 		}
-		console.log('PLACEDATA OBJECT: ', placeData);
+		console.log('Object: ', placeData)
+		res.send(placeData);
 	} catch (error) {
 		console.error('Error communicating to Geonames API in server');
 	}

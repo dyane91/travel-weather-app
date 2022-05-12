@@ -2,7 +2,9 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>Sentiment/Emotion Analyzer</title>
+				<meta name="viewport" content="width=device-width" />
+        <title>Travel App</title>
+				<script src="https://kit.fontawesome.com/5073668761.js" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Questrial&display=swap" rel="stylesheet">
@@ -18,8 +20,14 @@
 
         <main>
             <section>
-                <form class="">                    
-                    <input id="city" type="text" name="input" value="" placeholder="INSERT CITY HERE">
+                <form class=""> 
+										<i class="fa-solid fa-route"></i><p>Where would you like to travel to?</p>                   
+                    <input id="city" type="text" name="input" value="" placeholder="City and/or country">
+										<i class="fa-solid fa-calendar-days"></i><p>When are you planning to go?</p>
+										<p>Depart:</p>
+										<input id="start-date" type="date" min="7/1/2022">
+										<p>Return:</p>
+										<input id="end-date" type="date" min="">
                     <input id="button" type="submit" name="" value="SUBMIT" onclick="Client.formHandler(event)">
                 </form>
          <section>

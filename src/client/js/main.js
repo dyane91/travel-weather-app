@@ -4,7 +4,6 @@ export function formHandler (e) {
     let cityInputValue = document.getElementById('city').value;
     let nameOfPlace = cityInputValue.replace(/,?\s+/g, '-');
     e.preventDefault();
-    console.log('The city in frontend is: ',cityInputValue)
     getLatAndLong({nameOfPlace});
 }
 

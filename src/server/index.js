@@ -2,7 +2,7 @@
 // dotenv.config();
 const express = require("express");
 const app = express();
-// const fetch = require("node-fetch");
+const fetch = require("node-fetch");
 
 //Here we are configuring express to use body-parser as middle-ware.
 const bodyParser = require('body-parser');
@@ -15,6 +15,9 @@ app.use(express.static('./dist'))
 
 console.log(__dirname)
 
+//Object that will store only necessary data of the selected place to the frontend
+let placeData = {};
+
 // designates what port the app will listen to for incoming requests
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
@@ -23,3 +26,19 @@ app.listen(3000, function () {
 app.get('/', function (req, res) {
 	res.sendFile('dist/index.html')
 });
+
+app.post('/placeInfo', async function (req, res) {
+	console.log('Here inside /placeInfo route in backend. The city is: ', req.body.nameOfPlace);
+	const response = await fetch(`http://api.geonames.org/searchJSON?q=${req.body.nameOfPlace}&maxRows=1&username=av_dyane`);
+	const data = await response.json();
+	try {
+		placeData = {
+			latitude: data.geonames[0].lat,
+			longitude: data.geonames[0].lng,
+			country: data.geonames[0].countryName
+		}
+		console.log('PLACEDATA OBJECT: ', placeData);
+	} catch (error) {
+		console.error('Error communicating to Geonames API in server');
+	}
+})

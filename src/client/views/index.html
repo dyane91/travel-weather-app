@@ -25,7 +25,7 @@
                     <input id="city" type="text" name="input" value="" placeholder="City and/or country">
 										<i class="fa-solid fa-calendar-days"></i><p>When are you planning to go?</p>
 										<p>Depart:</p>
-										<input id="start-date" type="date" min="7/1/2022">
+										<input id="start-date" type="date" min="">
 										<p>Return:</p>
 										<input id="end-date" type="date" min="">
                     <input id="button" type="submit" name="" value="SUBMIT" onclick="Client.formHandler(event)">
@@ -42,6 +42,16 @@
 
         <footer>
             <p>© Dyane Avalos</p>
-        </footer>      
+        </footer>   
+				<!-- To fill in the value of the min attribute in <input type="date"> -->
+				<script type="text/javascript">
+					document.addEventListener('DOMContentLoaded', function (){
+    				let today = new Date();
+    				let tomorrow = new Date(today);
+						tomorrow.setDate(tomorrow.getDate() + 1);
+						document.getElementById('start-date').min = Client.convertDate(today);
+						document.getElementById('end-date').min = Client.convertDate(tomorrow);
+					});
+				</script>   
     </body>
 </html>

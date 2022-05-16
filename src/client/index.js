@@ -1,3 +1,6 @@
 import { formHandler } from "./js/main";
-
-export { formHandler }
+import { convertDate } from "./js/checkDate";
+export { 
+    formHandler,
+    convertDate
+}

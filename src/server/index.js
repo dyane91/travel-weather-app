@@ -41,4 +41,16 @@ app.post('/placeInfo', async function (req, res) {
 	} catch (error) {
 		console.error('Error communicating to Geonames API in server');
 	}
+});
+
+app.post('/forecast', async function (req, res){
+	// if(req.body.isCurrentForecast === 'yes'){
+	// 	const response = await fetch(`https://api.weatherbit.io/v2.0/current?lat=${placeData.latitude}&lon=-${placeData.longitude}&key=${process.env.WEATHERBIT_API_KEY}`);
+	// 	const currentWeatherData = await response.json();
+	// 	try {
+	// 		placeData = {
+	// 			dates: []
+	// 		}
+	// 	}
+	// }
 })

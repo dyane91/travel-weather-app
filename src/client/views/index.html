@@ -21,13 +21,13 @@
         <main>
             <section>
                 <form class=""> 
-										<i class="fa-solid fa-route"></i><p>Where would you like to travel to?</p>                   
+                    <i class="fa-solid fa-route"></i><p>Where would you like to travel to?</p>                   
                     <input id="city" type="text" name="input" value="" placeholder="City and/or country">
-										<i class="fa-solid fa-calendar-days"></i><p>When are you planning to go?</p>
-										<p>Depart:</p>
-										<input id="start-date" type="date" min="">
-										<p>Return:</p>
-										<input id="end-date" type="date" min="">
+                    <i class="fa-solid fa-calendar-days"></i><p>When are you planning to go?</p>
+                    <p>Depart:</p>
+                    <input id="start-date" class="end-max" type="date" min="" max="">
+                    <p>Return:</p>
+                    <input id="end-date" class="end-max" type="date" min="" max="">
                     <input id="button" type="submit" name="" value="SUBMIT" onclick="Client.formHandler(event)">
                 </form>
          <section>
@@ -43,15 +43,14 @@
         <footer>
             <p>© Dyane Avalos</p>
         </footer>   
-				<!-- To fill in the value of the min attribute in <input type="date"> -->
-				<script type="text/javascript">
-					document.addEventListener('DOMContentLoaded', function (){
-    				let today = new Date();
-    				let tomorrow = new Date(today);
-						tomorrow.setDate(tomorrow.getDate() + 1);
-						document.getElementById('start-date').min = Client.convertDate(today);
-						document.getElementById('end-date').min = Client.convertDate(tomorrow);
-					});
-				</script>   
+        <!-- To fill in the value of the min attribute in <input type="date"> -->
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {	
+                document.getElementById('start-date').min = Client.dates.today;
+                document.getElementById('start-date').max = Client.dates.day16th;
+                document.getElementById('end-date').min = Client.dates.tomorrow;
+                document.getElementById('end-date').max = Client.dates.day16th;
+            });
+        </script>   
     </body>
 </html>

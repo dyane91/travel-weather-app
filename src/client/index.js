@@ -1,10 +1,11 @@
 import { formHandler } from "./js/main";
-import { dates } from "./js/convertDate";
-import { checkDates, isReturnAfterDeparture } from "./js/checkDates";
- 
+import { dates, convertDate } from "./js/convertDate";
+import { isWithinAweek, isReturnAfterDeparture } from "./js/checkDates";
+
 export { 
     formHandler,
     dates, 
-    checkDates,
+    convertDate,
+    isWithinAweek,
     isReturnAfterDeparture
 }

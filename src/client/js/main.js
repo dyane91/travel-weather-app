@@ -10,7 +10,7 @@ export function formHandler (e) {
 	/* logic to check if departure date is within this week or not */ 
 	let departureDate = document.getElementById('start-date').value;
 	let returnDate = document.getElementById('end-date').value;
-	if(departureDate){
+	if(departureDate && cityInputValue){
 		let dates = [];
 		if(returnDate){
 			Client.isReturnAfterDeparture(departureDate, returnDate);
@@ -18,18 +18,16 @@ export function formHandler (e) {
 			let lengthTrip = Math.floor((new Date(returnDate) - new Date(departureDate)) / (1000*60*60*24) +1);
 			console.log('el trip dura: ',lengthTrip)
 			//Limpiar este codigo:
-			Client.checkDates(departureDate);
+			Client.isWithinAweek(departureDate);
 
 		} else {
 			dates.push(departureDate);
 			console.log('No return date, but departure is on ',dates)
 		}
 	} else {
-		alert('Make sure you selected your departure date')
+		alert('Make sure you selected the city and/or your departure date')
 	}
-
-	// checkDates();
-	}
+}
 
 //Fetch data from Geonames API to get latitude, longitude, city and country params
 const getLatAndLong = async (data) => {

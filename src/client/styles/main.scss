@@ -1,0 +1,11 @@
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1;
+    grid-template-rows: 2fr 8fr 1fr;
+    grid-template-areas: 
+        'header' 
+        'main-area' 
+        'footer';
+    font-family: 'Questrial', sans-serif;
+}

@@ -2,41 +2,46 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-				<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width" />
         <title>Travel App</title>
-				<script src="https://kit.fontawesome.com/5073668761.js" crossorigin="anonymous"></script>
+		<script src="https://kit.fontawesome.com/5073668761.js" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Questrial&display=swap" rel="stylesheet">
     </head>
 
     <body>
-
         <header>
             <div class="logo">
-                Travel app
+                <p>It's time to travel!</p>
+            </div>
+            <div>
+                <p>Check the weather conditions of the place you are going to, pack what is needed and be ready! </p>
             </div>
         </header>
 
         <main>
             <section>
                 <form class=""> 
-                    <i class="fa-solid fa-route"></i><p>Where would you like to travel to?</p>                   
+                    <div class="p-icon">
+                        <i class="fa-solid fa-route fa-lg fa-fw"></i><p>Where would you like to travel to?</p>                   
+                    </div>
                     <input id="city" type="text" name="input" value="" placeholder="City and/or country">
-                    <i class="fa-solid fa-calendar-days"></i><p>When are you planning to go?</p>
-                    <p>Depart:</p>
-                    <input id="start-date" class="end-max" type="date" min="" max="">
-                    <p>Return:</p>
-                    <input id="end-date" class="end-max" type="date" min="" max="">
+                    <div class="p-icon">
+                        <i class="fa-solid fa-calendar-days fa-lg fa-fw"></i><p>When are you planning to go?</p>
+                    </div>
+                    <div id="form-dates">
+                        <!-- <div> -->
+                            <p>Depart:</p>
+                            <input id="start-date" class="end-max" type="date" min="" max="">
+                        <!-- </div>
+                        <div> -->
+                            <p>Return:</p>
+                            <input id="end-date" class="end-max" type="date" min="" max="">
+                        <!-- </div> -->
+                    </div>
                     <input id="button" type="submit" name="" value="SUBMIT" onclick="Client.formHandler(event)">
                 </form>
-         <section>
-                </form>
-            </section>
-
-            <section>
-                <div id="results">
-                </div>
             </section>
         </main>
 

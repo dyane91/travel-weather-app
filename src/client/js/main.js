@@ -1,29 +1,17 @@
 export function formHandler (e) {
 	e.preventDefault();
-	/* Check what text was put into input field and this Regex is to remove white spaces 
-	or commas from the value to be used on the api call */
+
 	let cityInputValue = document.getElementById('city').value;
-	let nameOfPlace = cityInputValue.replace(/,?\s+/g, '-');
-	
-	// getLatAndLong({nameOfPlace});
-	
-	/* logic to check if departure date is within this week or not */ 
+	let nameOfPlace = cityInputValue.replace(/,?\s+/g, '-'); // Regex to remove white spaces or commas
 	let departureDate = document.getElementById('start-date').value;
 	let returnDate = document.getElementById('end-date').value;
+	let lengthTrip = 1; //by default
+	
 	if(departureDate && cityInputValue){
-		let dates = [];
 		if(returnDate){
-			Client.isReturnAfterDeparture(departureDate, returnDate);
-			//Calcular el length del trip
-			let lengthTrip = Math.floor((new Date(returnDate) - new Date(departureDate)) / (1000*60*60*24) +1);
-			console.log('el trip dura: ',lengthTrip)
-			//Limpiar este codigo:
-			Client.isWithinAweek(departureDate);
-
-		} else {
-			dates.push(departureDate);
-			console.log('No return date, but departure is on ',dates)
+			lengthTrip = getLengthTrip(departureDate, returnDate);
 		}
+		getCurrentForecast({ nameOfPlace, departureDate, lengthTrip,  });
 	} else {
 		alert('Make sure you selected the city and/or your departure date')
 	}
@@ -53,5 +41,31 @@ const getCurrentForecast = async (data) => {
 		},
 		body: JSON.stringify(data)
 	});
+}
+
+const addDays = (date) => {
+	let dat = new Date(date);
+	dat.setDate(dat.getDate() + 1);
+	return dat.toISOString().split('T')[0];
+}
+
+const getLengthTrip = (startDate, returnDate) => Math.floor((new Date(returnDate) - new Date(startDate)) / (1000*60*60*24) +1);
+
+const getAllDates = (startDate, endDate) => {
+	let dates = [];
+	if (endDate){
+		/* To validate the return date comes after departure */
+		Client.isReturnAfterDeparture(startDate, endDate);
+		let currentDate = startDate;
+		while (currentDate <= endDate) {
+			dates.push(currentDate)
+			currentDate = addDays(currentDate);
+		}
+		console.log("Estos son los dias: ", dates)
+		return dates;
+	} else {
+		console.log('The trip does not have a return date specified')
+		dates.push(startDate);
+	}
 }
 

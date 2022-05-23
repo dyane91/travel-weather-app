@@ -44,13 +44,37 @@ app.post('/placeInfo', async function (req, res) {
 });
 
 app.post('/forecast', async function (req, res){
-	// if(req.body.isCurrentForecast === 'yes'){
-	// 	const response = await fetch(`https://api.weatherbit.io/v2.0/current?lat=${placeData.latitude}&lon=-${placeData.longitude}&key=${process.env.WEATHERBIT_API_KEY}`);
-	// 	const currentWeatherData = await response.json();
-	// 	try {
-	// 		placeData = {
-	// 			dates: []
-	// 		}
-	// 	}
-	// }
-})
+	console.log('INSIDE FORECAST PATH')
+	//I need length, start-date
+	let departure = req.body.departureDate;
+	let lengthTrip = req.body.lengthTrip;
+
+
+	const response = await fetch(`http://api.geonames.org/searchJSON?q=${req.body.nameOfPlace}&maxRows=1&username=${process.env.GEONAMES_USERNAME}`);
+	const data = await response.json();
+	const lat = data.geonames[0].lat;
+	const long = data.geonames[0].lng;
+
+	const respWeather = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?&lat=${lat}&lon=${long}&key=${process.env.WEATHERBIT_API_KEY}`)
+	const weatherData = await respWeather.json();
+
+	// console.log('Data from WeatherApi: ****',weatherData)
+	let forecast = new Array;
+	let dateArrApi = weatherData.data; //its length will always be 15 because it returns 16-days forecast
+
+	for(let i = 0; i < dateArrApi.length; i++){
+		// Once startDate matches the api based on the date
+		if(departure === dateArrApi[i].datetime){
+			if(lengthTrip > 1) {
+				forecast = dateArrApi.slice(i, i + lengthTrip);
+				console.log('This is the forecast for many days: ', forecast);
+			} else {
+				forecast = dateArrApi[i];
+				console.log('This is the weather for ONLY ONE day: ', forecast)
+				break;
+			}
+		}
+	}
+	placeData.weatherData = forecast;
+	res.send(placeData);
+});

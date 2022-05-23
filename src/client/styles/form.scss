@@ -1,0 +1,85 @@
+main {
+    grid-area: main-area;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../media/weather-bg.jpg);
+    background-repeat: repeat;
+    background-size: contain;
+    background-position: center;
+    color: white;
+    font-size: 1em;
+}
+
+section { 
+    width: 30%;
+    background-color: #0A2239;
+    padding: 3em;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    height: 4vh;
+    width: 100%;
+    font-family: 'Questrial', sans-serif ;
+}
+
+#button {
+    background-color: #E59500;
+    font-weight: 900;
+    width: 100%;
+    margin-top: 2em;
+    border-radius: 25px;
+    box-shadow: 2px 4px white;
+}
+
+#button:hover {
+    cursor: pointer;
+}
+
+
+#form-dates {
+    display: flex;
+    flex-direction: column;
+}
+
+#form-dates p {
+    margin: 0;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.p-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#title {
+    background-color: black;
+    color: white;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 25px;
+    padding: 2em;
+}
+
+/* Medium screen devices (768px and above) */
+@media only screen and (min-width: 768px) and (max-width: 889px){
+    section {
+        width: 50%;
+    }
+}
+
+/* For small screen devices (595px and below) */
+@media only screen and (max-width: 595px) and (max-width: 767px){
+    section {
+        width: 50%;
+    }
+}

@@ -31,22 +31,6 @@ app.get('/', function (req, res) {
 	res.sendFile('dist/index.html')
 });
 
-// app.post('/placeInfo', async function (req, res) {
-// 	const response = await fetch(`http://api.geonames.org/searchJSON?q=${req.body.nameOfPlace}&maxRows=1&username=${process.env.GEONAMES_USERNAME}`);
-// 	const data = await response.json();
-// 	try {
-// 		placeData = {
-// 			latitude: data.geonames[0].lat,
-// 			longitude: data.geonames[0].lng,
-// 			country: data.geonames[0].countryName
-// 		}
-// 		console.log('Object: ', placeData)
-// 		res.send(placeData);
-// 	} catch (error) {
-// 		console.error('Error communicating to Geonames API in server');
-// 	}
-// });
-
 app.post('/forecast', async function (req, res){
 	console.log('INSIDE FORECAST PATH')
 	let departure = req.body.departureDate;
@@ -81,13 +65,15 @@ app.post('/forecast', async function (req, res){
 	placeData.weatherData = forecast;
 
 	/* Call to Pixabay API to get pictures */
-	const respPixabay = await fetch(`https://pixabay.com/api/?key=${process.env.PIXABAY_API_KEY}&q=${req.body.nameOfPlace}&image_type=photo&pretty=true&category=places`)
+	const respPixabay = await fetch(`https://pixabay.com/api/?key=${process.env.PIXABAY_API_KEY}&q=${req.body.nameOfPlace}&image_type=photo&pretty=true&category=places&orientation=horizontal`)
 	const dataPic = await respPixabay.json();
 
 	if(dataPic.hits.length){
 		placeData.image = dataPic.hits[0].largeImageURL;
-	} 
+	} else {
+		//default image
+		placeData.image = "https://pixabay.com/get/g140e4b274af5366f61857afc6d2b5aa9e5b21bb0e2a017e8c6b16199a8288732642b6624dd989d3e327fb94a78821312f09dbad8994fdca4d634c66032923c37_1280.jpg"
+	}
 	
-	console.log('DATA DEL LUGAR: ', placeData)
 	res.send(placeData);
 });

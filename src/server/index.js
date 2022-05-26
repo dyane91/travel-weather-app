@@ -23,42 +23,45 @@ app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 });
 
+app.get('/forecast', (req, res) => {
+	const params = req.params;
+});
+
 app.get('/', function (req, res) {
 	res.sendFile('dist/index.html')
 });
 
-app.post('/placeInfo', async function (req, res) {
-	const response = await fetch(`http://api.geonames.org/searchJSON?q=${req.body.nameOfPlace}&maxRows=1&username=${process.env.GEONAMES_USERNAME}`);
-	const data = await response.json();
-	try {
-		placeData = {
-			latitude: data.geonames[0].lat,
-			longitude: data.geonames[0].lng,
-			country: data.geonames[0].countryName
-		}
-		console.log('Object: ', placeData)
-		res.send(placeData);
-	} catch (error) {
-		console.error('Error communicating to Geonames API in server');
-	}
-});
+// app.post('/placeInfo', async function (req, res) {
+// 	const response = await fetch(`http://api.geonames.org/searchJSON?q=${req.body.nameOfPlace}&maxRows=1&username=${process.env.GEONAMES_USERNAME}`);
+// 	const data = await response.json();
+// 	try {
+// 		placeData = {
+// 			latitude: data.geonames[0].lat,
+// 			longitude: data.geonames[0].lng,
+// 			country: data.geonames[0].countryName
+// 		}
+// 		console.log('Object: ', placeData)
+// 		res.send(placeData);
+// 	} catch (error) {
+// 		console.error('Error communicating to Geonames API in server');
+// 	}
+// });
 
 app.post('/forecast', async function (req, res){
 	console.log('INSIDE FORECAST PATH')
-	//I need length, start-date
 	let departure = req.body.departureDate;
 	let lengthTrip = req.body.lengthTrip;
 
-
+	/* Call to GeonamesAPI to get latitude and longitude of location */
 	const response = await fetch(`http://api.geonames.org/searchJSON?q=${req.body.nameOfPlace}&maxRows=1&username=${process.env.GEONAMES_USERNAME}`);
 	const data = await response.json();
 	const lat = data.geonames[0].lat;
 	const long = data.geonames[0].lng;
 
-	const respWeather = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?&lat=${lat}&lon=${long}&key=${process.env.WEATHERBIT_API_KEY}`)
+	/* Call to Weatherbit API to get forecast */
+	const respWeather = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?&lat=${lat}&lon=${long}&key=${process.env.WEATHERBIT_API_KEY}&units=I`)
 	const weatherData = await respWeather.json();
 
-	// console.log('Data from WeatherApi: ****',weatherData)
 	let forecast = new Array;
 	let dateArrApi = weatherData.data; //its length will always be 15 because it returns 16-days forecast
 
@@ -76,5 +79,15 @@ app.post('/forecast', async function (req, res){
 		}
 	}
 	placeData.weatherData = forecast;
+
+	/* Call to Pixabay API to get pictures */
+	const respPixabay = await fetch(`https://pixabay.com/api/?key=${process.env.PIXABAY_API_KEY}&q=${req.body.nameOfPlace}&image_type=photo&pretty=true&category=places`)
+	const dataPic = await respPixabay.json();
+
+	if(dataPic.hits.length){
+		placeData.image = dataPic.hits[0].largeImageURL;
+	} 
+	
+	console.log('DATA DEL LUGAR: ', placeData)
 	res.send(placeData);
 });

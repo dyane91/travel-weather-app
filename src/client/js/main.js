@@ -1,4 +1,4 @@
-export function formHandler (e) {
+export async function formHandler (e) {
 	e.preventDefault();
 
 	let cityInputValue = document.getElementById('city').value;
@@ -11,27 +11,15 @@ export function formHandler (e) {
 		if(returnDate){
 			lengthTrip = getLengthTrip(departureDate, returnDate);
 		}
-		getCurrentForecast({ nameOfPlace, departureDate, lengthTrip,  });
+		getForecast({ nameOfPlace, departureDate, lengthTrip  });
+	 	await forecastInfo();
 	} else {
 		alert('Make sure you selected the city and/or your departure date')
 	}
 }
 
-//Fetch data from Geonames API to get latitude, longitude, city and country params
-const getLatAndLong = async (data) => {
-	const request = await fetch('http://localhost:3000/placeInfo',  {
-	method: 'POST',
-	mode: 'cors',
-	credentials: 'same-origin',
-	headers: {
-		'Content-type': 'application/json'
-	},
-	body: JSON.stringify(data)
-	});
-    console.log("frontend: ", request);
-}
-
-const getCurrentForecast = async (data) => {
+//Fetch data from different apis
+const getForecast = async (data) => {
 	const request = await fetch('http://localhost:3000/forecast', {
 		method: 'POST',
 		mode: 'cors',
@@ -41,6 +29,21 @@ const getCurrentForecast = async (data) => {
 		},
 		body: JSON.stringify(data)
 	});
+
+	const weatherData = await request.json();
+	console.log('WEATHER: ', weatherData);
+
+	document.getElementById("nameofplace").innerHTML = 	document.getElementById('city').value;
+	document.getElementById("temperature").innerHTML = weatherData.weatherData.temp;
+	document.getElementById("temp-like").innerHTML = weatherData.weatherData.app_max_temp;
+	document.getElementById("min-temp").innerHTML = weatherData.weatherData.min_temp;
+	document.getElementById("max-temp").innerHTML = weatherData.weatherData.max_temp;
+	document.getElementById("wind").innerHTML = weatherData.weatherData.wind_spd;
+	document.getElementById("precipitation").innerHTML = weatherData.weatherData.pop;
+	document.getElementById("sunrise").innerHTML = weatherData.weatherData.sunrise_ts;
+	document.getElementById("sunset").innerHTML = weatherData.weatherData.sunset_ts;
+	// document.getElementById("first-sec").background = url(weatherData.image);
+
 }
 
 const addDays = (date) => {
@@ -67,5 +70,19 @@ const getAllDates = (startDate, endDate) => {
 		console.log('The trip does not have a return date specified')
 		dates.push(startDate);
 	}
+}
+
+const forecastInfo = async () => {
+	const response = await fetch('http://localhost:3000/');
+	
+	try {
+		const data = await response.json();
+		console.log('Data in front end***:', data)
+
+	} catch (error){
+		console.error('Error getting data from server in FE:', error)
+
+	}
+
 }
 

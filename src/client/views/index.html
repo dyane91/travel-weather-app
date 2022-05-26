@@ -40,11 +40,73 @@
                             <input id="end-date" class="end-max" type="date" min="" max="">
                         <!-- </div> -->
                     </div>
-                    <input id="button" type="submit" name="" value="SUBMIT" onclick="Client.formHandler(event)">
+
+                    <button id="button" name="" onclick="callback()">SUBMIT </button>
                 </form>
             </section>
         </main>
+        <div id="results">
+            <div id="first-sec">
+                <div id="city-info">
+                    <div class="row">
+                        <div class="imp place-name">
+                            <i class="fa-solid fa-location-dot"></i><span id="nameofplace">New York</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Typical weather for then is:</p>
+                        <div id="temperature">39°</div>
+                        <div class="row">
+                            <div class="">Feels like: <span id="temp-like">42</span>°</div>
+                            <!-- <div id="temp-like">42</div> -->
+                        </div>
+                    </div>
+                    <div id="wrong-city">
+                        It is not the place you were looking for? Try typing again in format <em>city, country</em>.<br>
+                    </div>
+                </div>
+            </div>
+            <div id="second-sec">
+				<div id="box-weather">
+                    <p>May 12th, 2022</p>
+                    <div class="box-1">
+                        <div id="min-temp"><i class="fa-solid fa-temperature-low"></i>Min temp: 30</div>
+                        <div id="max-temp"><i class="fa-solid fa-temperature-high"></i>Max temp: 40</div>
+                        <div id="wind"><i class="fa-solid fa-wind"></i>Wind: 16.3 MPH</div>
+                        <div id="precipitation"><i class="fa-solid fa-cloud-rain"></i>Precipitation: 0%</div>
+                    </div>
+                    <div class="box-1">
+                        <div id="sunrise"><i class="fa-regular fa-clock"></i></i> Sunrise: 123455</div>
+                        <div id="sunset"><i class="fa-solid fa-clock"></i></i> Sunset: 876543</div>
+                        <div id="uv-index"><i class="fa-solid fa-sun"></i>UV Index: 4 de 10</div>
+                        <div id="cloud-cover"><i class="fa-solid fa-cloud"></i>Cloud cover: 4%</div>
+                    </div>
+				</div>
+				<div id="other-days">
+                    <div><p>Your trip has a length of <span id="length">3 days</span>. Here is the forecast for the following days:</p></div>
+                    <div id="more-forecast">
+                        <div class="additional">
+                            <div id="date">05/23/2022</div>
+                            <!-- <div id="icon"></div> -->
+                            <div id="min-temp" class="col"><span>Lowest T°</span>25</div>
+                            <div id="max-temp" class="col"><span>Highest T°</span>32</div>
+                            <div id="rainy" class="col"><span>Rainy</span>40%</div>
+                            <div id="humidity" class="col"><span>Humidity</span>25%</div>
+                        </div>
+                        <div class="additional">
+                            <div id="date">05/24/2022</div>
+                            <!-- <div id="icon"></div> -->
+                            <div id="min-temp" class="col"><span>Lowest T</span>28</div>
+                            <div id="max-temp" class="col"><span>Highest</span>35</div>
+                            <div id="rainy" class="col"><span>Rainy</span>20%</div>
+                            <div id="humidity" class="col"><span>Humidity</span>29%</div>
+                        </div>
+                    </div>
+				</div>
 
+            </div>
+        </div>
+        
         <footer>
             <p>© Dyane Avalos</p>
         </footer>   
@@ -56,6 +118,12 @@
                 document.getElementById('end-date').min = Client.dates.tomorrow;
                 document.getElementById('end-date').max = Client.dates.day16th;
             });
+
+            function callback() {
+                // update formHandler para q retorne el data
+                const data = Client.formHandler(event);
+
+            }
         </script>   
     </body>
 </html>

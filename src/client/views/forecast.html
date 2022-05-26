@@ -1,0 +1,49 @@
+<html>
+  <head>
+
+	</head> 
+	<body>
+		<header>
+
+		</header>
+		<main>
+			<section id="first-section">
+				<div id="city-info">
+					<div>
+						<p>Typical weather for then is:</p>
+						<div id="temperature"></div>
+						<div>
+							<i class="fa-solid fa-location-dot"></i><p id="nameofplace"></p>
+						</div>
+					</div>
+					<div>
+						It is not the place you were looking for? Try typing again in format <em>city, country</em>.<br>
+						<a>Click here</a>to go back to the main page.
+					</div>
+				</div>
+			</section>
+			<section id="second-section">
+				<div id="trip-length"></div>
+				<div id="box-weather">
+
+				</div>
+				<div id="other-days">
+
+				</div>
+
+			</section>
+
+		</main>
+		<footer>
+
+		</footer>
+		<div id="loader-wrapper">
+			<span class="loader"></span>
+		</div>
+		<script>
+			$(window).on("load", function(){
+				$("#loader-wrapper").fadeOut("slow")
+			});
+		</script>
+	</body>
+</html>

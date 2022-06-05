@@ -15,7 +15,7 @@ app.use(express.static('./dist'))
 
 console.log(__dirname)
 
-//Object that will store only necessary data of the selected place to the frontend
+//Object that will store data of the selected place
 let placeData = {};
 
 // designates what port the app will listen to for incoming requests
@@ -56,7 +56,7 @@ app.post('/forecast', async function (req, res){
 				forecast = dateArrApi.slice(i, i + lengthTrip);
 				console.log('This is the forecast for many days: ', forecast);
 			} else {
-				forecast = dateArrApi[i];
+				forecast.push(dateArrApi[i]);
 				console.log('This is the weather for ONLY ONE day: ', forecast)
 				break;
 			}

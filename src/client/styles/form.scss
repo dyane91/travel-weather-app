@@ -86,7 +86,7 @@ input {
 #first-sec {
     width: 90%;
     background-color: white;
-    background-image: url(../media/brooklyn.jpeg);
+    // background-image: url(../media/brooklyn.jpeg);
     background-size: cover;
     background-position: center;
     position: relative;
@@ -115,6 +115,14 @@ input {
         }
     }
 }
+
+// #second-sec {
+//     display: none;
+// }
+
+// #other-days {
+//     display: none;
+// }
 
 #city-info {
     background-color: white;
@@ -159,34 +167,38 @@ input {
     color: #E59500;
 }
 
-#more-forecast {
-    margin-bottom: 3em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .additional {
-        border: 0.2em solid #0A2239;
-        border-radius: 25px;
-        width: 40vw;
+#other-days{
+    visibility: hidden;
+    #more-forecast {
+        margin-bottom: 3em;
         display: flex;
-        flex-direction: row;
-        justify-content: space-around;
+        flex-direction: column;
         align-items: center;
-        padding: 2em;
-        margin: 0.5em;
-        .col {
+        .additional {
+            border: 0.2em solid #0A2239;
+            border-radius: 25px;
+            width: 40vw;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            flex-direction: row;
+            justify-content: space-around;
             align-items: center;
-            span {
-                font-size: 0.6em;
-                padding-bottom: 10px;
-                color: #E59500;
+            padding: 2em;
+            margin: 0.5em;
+            .col {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                span {
+                    font-size: 0.6em;
+                    padding-bottom: 10px;
+                    color: #E59500;
+                }
             }
         }
     }
 }
+
 
 /* Medium screen devices (768px and above) */
 @media only screen and (min-width: 768px) and (max-width: 889px){

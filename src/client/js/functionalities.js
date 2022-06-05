@@ -1,4 +1,10 @@
+/* Since WeatherbitAPI returns the forecast for the next 16 days only, 
+users can only select a date in between that range. This 'dates' object stores today, tomorrow, 
+and the 16th day to fill in the values (min, max) of <input type="date"> */
 export let dates = {};
+
+/* Function to convert a date to string in format yyyy-mm-dd */
+export const convertDate = (date) => date.toISOString().split('T')[0];
 
 let today = new Date();
 let tomorrow = new Date();
@@ -6,12 +12,16 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 let next16Days = new Date();
 next16Days.setDate(next16Days.getDate() + 15);
 
-/* Function to convert a date to string in format yyyy-mm-dd */
-export const convertDate = (date) => date.toISOString().split('T')[0]
-
 dates.today = convertDate(today);
 dates.tomorrow = convertDate(tomorrow);
 dates.day16th = convertDate(next16Days);
+
+/* Function to check that return date comes after departure */
+export function isReturnAfterDeparture (departDay, returnDay) {
+	if (departDay > returnDay) {
+		alert('Your return date cannot be before your departure :) Check again!')
+	}
+}
 
 /* Function to convert timestamp to time in format HH:MM */
 export const convertTime = (timestamp) => {
@@ -24,6 +34,7 @@ export const convertTime = (timestamp) => {
     return `${hours}:${minutes}`;
 }
 
+/* Function to convert a date in format 'yyyy-mm-dd' to 'Month Day, Year' */
 export const convertToLongDate = (date) => {
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let d = new Date(date);
@@ -31,6 +42,7 @@ export const convertToLongDate = (date) => {
     return longDate; 
 }
 
+/* Function that will inject this html portion with forecast info if the trip length is 2 days or more */
 export function displayMoreForecast (weatherData) {
     let parentDiv = document.getElementById("more-forecast");
 
@@ -43,5 +55,4 @@ export function displayMoreForecast (weatherData) {
             <div id="humidity" class="col"><span>Humidity</span>${weatherData[i].rh}%</div>
         </div>`);
     }
-    // document.getElementById("other-days").style.display = "flex";
 }

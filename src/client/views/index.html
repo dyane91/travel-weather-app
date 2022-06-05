@@ -31,17 +31,13 @@
                         <i class="fa-solid fa-calendar-days fa-lg fa-fw"></i><p>When are you planning to go?</p>
                     </div>
                     <div id="form-dates">
-                        <!-- <div> -->
-                            <p>Depart:</p>
-                            <input id="start-date" class="end-max" type="date" min="" max="">
-                        <!-- </div>
-                        <div> -->
-                            <p>Return:</p>
-                            <input id="end-date" class="end-max" type="date" min="" max="">
-                        <!-- </div> -->
+                        <p>Depart:</p>
+                        <input id="start-date" class="end-max" type="date" min="" max="">
+                        <p>Return:</p>
+                        <input id="end-date" class="end-max" type="date" min="" max="">
                     </div>
 
-                    <button id="button" name="" onclick="callback()">SUBMIT </button>
+                    <button id="button" name="" onclick="Client.formHandler(event)"> SUBMIT </button>
                 </form>
             </section>
         </main>
@@ -86,20 +82,6 @@
             <div id="other-days">
                 <div><p>Your trip has a length of <span id="length"></span>. Here is the forecast for the following days:</p></div>
                 <div id="more-forecast">
-                    <!-- <div class="additional">
-                        <div id="date">05/23/2022</div>
-                        <div id="min-temp" class="col"><span>Lowest T°</span>25</div>
-                        <div id="max-temp" class="col"><span>Highest T°</span>32</div>
-                        <div id="rainy" class="col"><span>Rainy</span>40%</div>
-                        <div id="humidity" class="col"><span>Humidity</span>25%</div>
-                    </div>
-                    <div class="additional">
-                        <div id="date">05/24/2022</div>
-                        <div id="min-temp" class="col"><span>Lowest T</span>28</div>
-                        <div id="max-temp" class="col"><span>Highest</span>35</div>
-                        <div id="rainy" class="col"><span>Rainy</span>20%</div>
-                        <div id="humidity" class="col"><span>Humidity</span>29%</div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -107,7 +89,7 @@
         <footer>
             <p>© Dyane Avalos</p>
         </footer>   
-        <!-- To fill in the value of the min attribute in <input type="date"> -->
+        <!-- To fill in the value of the min and max attributes in <input type="date"> -->
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function () {	
                 document.getElementById('start-date').min = Client.dates.today;
@@ -115,12 +97,6 @@
                 document.getElementById('end-date').min = Client.dates.tomorrow;
                 document.getElementById('end-date').max = Client.dates.day16th;
             });
-
-            function callback() {
-                // update formHandler para q retorne el data
-                const data = Client.formHandler(event);
-
-            }
         </script>   
     </body>
 </html>

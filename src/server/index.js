@@ -72,7 +72,7 @@ app.post('/forecast', async function (req, res){
 		placeData.image = dataPic.hits[0].largeImageURL;
 	} else {
 		//default image
-		placeData.image = "https://pixabay.com/get/g140e4b274af5366f61857afc6d2b5aa9e5b21bb0e2a017e8c6b16199a8288732642b6624dd989d3e327fb94a78821312f09dbad8994fdca4d634c66032923c37_1280.jpg"
+		placeData.image = "https://pixabay.com/get/g8049369a5a86ff693b312c0f94d60a87a00e2877076b404c0eda7fd84a44a334b6cab0031974c9ebdfed026efaf3a8f20fa10c6aec0d0325cdc58f116843109a_1280.jpg"
 	}
 	
 	res.send(placeData);

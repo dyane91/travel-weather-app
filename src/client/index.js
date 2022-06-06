@@ -2,7 +2,6 @@ import { formHandler } from "./js/main";
 import { dates, convertDate, convertTime, getLengthTrip, isReturnAfterDeparture, convertToLongDate, displayMoreForecast } from "./js/functionalities";
 import './styles/header.scss';
 import './styles/main.scss';
-import './styles/form.scss';
 import './styles/footer.scss';
 
 export { 

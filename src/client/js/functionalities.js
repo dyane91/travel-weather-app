@@ -23,6 +23,9 @@ export function isReturnAfterDeparture (departDay, returnDay) {
 	}
 }
 
+/* Function that will return the length of the trip */
+export const getLengthTrip = (startDate, returnDate) => Math.floor((new Date(returnDate) - new Date(startDate)) / (1000*60*60*24) +1);
+
 /* Function to convert timestamp to time in format HH:MM */
 export const convertTime = (timestamp) => {
     // Create a new JavaScript Date object based on the timestamp

@@ -10,7 +10,7 @@ export async function formHandler (event) {
 	
 	if(departureDate && cityInputValue){
 		if(returnDate){
-			lengthTrip = getLengthTrip(departureDate, returnDate);
+			lengthTrip = Client.getLengthTrip(departureDate, returnDate);
 		}
 		getForecast({ nameOfPlace, departureDate, lengthTrip  });
 		document.getElementById("results").style.display = "flex";
@@ -57,5 +57,3 @@ const getForecast = async (data) => {
 		document.getElementById("other-days").style.visibility = "visible";
 	}
 }
-
-const getLengthTrip = (startDate, returnDate) => Math.floor((new Date(returnDate) - new Date(startDate)) / (1000*60*60*24) +1);

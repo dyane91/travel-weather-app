@@ -1,5 +1,5 @@
 import { formHandler } from "./js/main";
-import { dates, convertDate, convertTime, isReturnAfterDeparture, convertToLongDate, displayMoreForecast } from "./js/functionalities";
+import { dates, convertDate, convertTime, getLengthTrip, isReturnAfterDeparture, convertToLongDate, displayMoreForecast } from "./js/functionalities";
 import './styles/header.scss';
 import './styles/main.scss';
 import './styles/form.scss';
@@ -10,6 +10,7 @@ export {
     dates, 
     convertDate,
     convertTime,
+    getLengthTrip,
     convertToLongDate,
     displayMoreForecast,
     isReturnAfterDeparture

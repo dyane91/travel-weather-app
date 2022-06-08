@@ -18,13 +18,10 @@ console.log(__dirname)
 //Object that will store data of the selected place
 let placeData = {};
 
+
 // designates what port the app will listen to for incoming requests
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-});
-
-app.get('/forecast', (req, res) => {
-	const params = req.params;
+	console.log('Example app listening on port 3000!')
 });
 
 app.get('/', function (req, res) {
@@ -77,3 +74,5 @@ app.post('/forecast', async function (req, res){
 	
 	res.send(placeData);
 });
+
+module.exports.app = app;

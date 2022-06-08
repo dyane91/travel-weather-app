@@ -6,7 +6,6 @@ describe("Testing the functionality", () => {
     })
     test("The date returned is in format Month Day, Year", () => {
         const date = '2022-02-22';
-        expect(convertToLongDate(date).toBe('February 2, 2022'));
-        expect(convertToLongDate(date).not.toBe('02-22-2022'));
+        expect(convertToLongDate(date)).toBe('February 22, 2022');
     });
 });

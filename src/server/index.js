@@ -18,23 +18,18 @@ console.log(__dirname)
 //Object that will store data of the selected place
 let placeData = {};
 
-// app.get('/', function (req, res) {
-// 	console.log('hohoho');
-// 	res.sendFile('dist/index.html')
-// });
-
 app.post('/forecast', async function (req, res){
-	console.log('INSIDE FORECAST PATH')
 	let departure = req.body.departureDate;
 	let lengthTrip = req.body.lengthTrip;
 
 	/* Call to GeonamesAPI to get latitude and longitude of location */
 	const response = await fetch(`http://api.geonames.org/searchJSON?q=${req.body.nameOfPlace}&maxRows=1&username=${process.env.GEONAMES_USERNAME}`);
 	const data = await response.json();
-	console.log(data.geonames);
+
 	if (data.geonames.length === 0) {
 		return res.send({ok: false});
 	}
+	
 	const lat = data.geonames[0].lat;
 	const long = data.geonames[0].lng;
 
@@ -50,10 +45,8 @@ app.post('/forecast', async function (req, res){
 		if(departure === dateArrApi[i].datetime){
 			if(lengthTrip > 1) {
 				forecast = dateArrApi.slice(i, i + lengthTrip);
-				console.log('This is the forecast for many days: ', forecast);
 			} else {
 				forecast.push(dateArrApi[i]);
-				console.log('This is the weather for ONLY ONE day: ', forecast)
 				break;
 			}
 		}

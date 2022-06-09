@@ -12,8 +12,7 @@ export async function formHandler (event) {
 		if(returnDate){
 			lengthTrip = Client.getLengthTrip(departureDate, returnDate);
 		}
-		getForecast({ nameOfPlace, departureDate, lengthTrip  });
-		document.getElementById("results").style.display = "flex";
+		getForecast({ nameOfPlace, departureDate, lengthTrip});
 	} else {
 		alert('Make sure you selected the city and/or your departure date')
 	}
@@ -33,6 +32,11 @@ const getForecast = async (data) => {
 
 	const weatherData = await request.json();
 
+	if (weatherData.ok === false) {
+		document.getElementById('error-message').style.display = 'block';
+		return;
+	}
+	document.getElementById('error-message').style.display = 'none';
 	/* Using Math.floor on decimal numbers */
 	/* Some values are being added with their corresponding icon */
 	document.getElementById("nameofplace").innerHTML = 	document.getElementById('city').value;
@@ -49,6 +53,9 @@ const getForecast = async (data) => {
 	document.getElementById("cloud-cover").innerHTML = `<i class="fa-solid fa-cloud"></i> Cloud cover: ${Math.floor(weatherData.weatherData[0].clouds)}%`;
 	document.getElementById("length").innerHTML = `${lengthTrip} days`;
 	document.getElementById("first-sec").style.backgroundImage = `url(${weatherData.image})`;
+	document.getElementById("first-sec").style.width = 'auto';
+	document.getElementById("first-sec").style.marginLeft = 0;
+	document.getElementById("first-sec").style.marginRight = 0;
 
 	/* When the trip length is for 2 days or more, the following function will be executed 
 	to display the forecast for those days */
@@ -56,4 +63,6 @@ const getForecast = async (data) => {
 		Client.displayMoreForecast(weatherData.weatherData);
 		document.getElementById("other-days").style.visibility = "visible";
 	}
+
+	document.getElementById("results").style.display = "flex";
 }

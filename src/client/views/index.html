@@ -41,6 +41,9 @@
                 </form>
             </section>
         </main>
+        <div class="error" id="error-message">
+            <p>Location was not found. Please check spelling and try again.</p>
+        </div>
         <div id="results">
             <div id="first-sec">
                 <div id="city-info">
@@ -98,8 +101,8 @@
                 document.getElementById('end-date').max = Client.dates.day16th;
             });
         </script>  
-        <!-- Service Workers -->
-        <script>
+        <!-- Service Worker -->
+        <!-- <script>
         // Check that service workers are supported
         if ('serviceWorker' in navigator) {
             // Use the window load event to keep the page load performant
@@ -107,6 +110,6 @@
                 navigator.serviceWorker.register('/service-worker.js');
             });
         }
-        </script> 
+        </script>  -->
     </body>
 </html>

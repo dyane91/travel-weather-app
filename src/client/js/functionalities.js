@@ -47,7 +47,11 @@ export const convertToLongDate = (date) => {
 
 /* Function that will inject this html portion with forecast info if the trip length is 2 days or more */
 export function displayMoreForecast (weatherData) {
-    let parentDiv = document.getElementById("more-forecast");
+    const parentDiv = document.getElementById("more-forecast");
+
+    while(parentDiv.lastElementChild) {
+        parentDiv.removeChild(parentDiv.lastElementChild);
+    }
 
     for (let i = 1; i < weatherData.length; i++){
         parentDiv.insertAdjacentHTML('beforeend', `<div class="additional">

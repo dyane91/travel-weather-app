@@ -18,15 +18,10 @@ console.log(__dirname)
 //Object that will store data of the selected place
 let placeData = {};
 
-
-// designates what port the app will listen to for incoming requests
-app.listen(3000, function () {
-	console.log('Example app listening on port 3000!')
-});
-
-app.get('/', function (req, res) {
-	res.sendFile('dist/index.html')
-});
+// app.get('/', function (req, res) {
+// 	console.log('hohoho');
+// 	res.sendFile('dist/index.html')
+// });
 
 app.post('/forecast', async function (req, res){
 	console.log('INSIDE FORECAST PATH')
@@ -36,6 +31,10 @@ app.post('/forecast', async function (req, res){
 	/* Call to GeonamesAPI to get latitude and longitude of location */
 	const response = await fetch(`http://api.geonames.org/searchJSON?q=${req.body.nameOfPlace}&maxRows=1&username=${process.env.GEONAMES_USERNAME}`);
 	const data = await response.json();
+	console.log(data.geonames);
+	if (data.geonames.length === 0) {
+		return res.send({ok: false});
+	}
 	const lat = data.geonames[0].lat;
 	const long = data.geonames[0].lng;
 
@@ -69,10 +68,17 @@ app.post('/forecast', async function (req, res){
 		placeData.image = dataPic.hits[0].largeImageURL;
 	} else {
 		//default image
-		placeData.image = "https://pixabay.com/get/g8049369a5a86ff693b312c0f94d60a87a00e2877076b404c0eda7fd84a44a334b6cab0031974c9ebdfed026efaf3a8f20fa10c6aec0d0325cdc58f116843109a_1280.jpg"
+		const respDefaultImg = await fetch(`https://pixabay.com/api/?key=${process.env.PIXABAY_API_KEY}&q=sky-clouds-sunny&image_type=photo&orientation=horizontal`);
+		const defaultPic = await respDefaultImg.json();
+		placeData.image = defaultPic.hits[0].largeImageURL
 	}
 	
 	res.send(placeData);
+});
+
+// designates what port the app will listen to for incoming requests
+app.listen(3000, function () {
+	console.log('Example app listening on port 3000!')
 });
 
 module.exports.app = app;

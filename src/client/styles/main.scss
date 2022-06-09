@@ -4,6 +4,8 @@ $orange-color: #E59500;
 $navy-color: #0A2239;
 $bold: 900;
 
+$screen-sm-min: 576px;
+
 body {
     min-height: 100vh;
     display: grid;
@@ -29,6 +31,7 @@ body {
         background-position: center;
         color: white;
         font-size: 1em;
+
         section { 
             width: 30%;
             background-color: $navy-color;
@@ -77,6 +80,12 @@ body {
         }
     }
 
+    #error-message {
+        color: red;
+        padding-left: 1em;
+        display: none;
+    }
+
     /* Forecast section */
 
     #results {
@@ -85,7 +94,7 @@ body {
         align-items: center;
         max-width: 100vw;
         #first-sec {
-            width: 90%;
+            width: 80vw;
             background-color: white;
             background-size: cover;
             background-position: center;
@@ -204,11 +213,13 @@ body {
     }
 
     #first-sec {
-        width: 80vw;
+        width: 70vw;
+        padding: 1em;
     }
 
     #box-weather {
-        width: 60vw;
+        font-size: 0.8em;
+        min-width: 85vw;
     }
 
     .additional {
@@ -217,26 +228,30 @@ body {
 }
 
 /* For small screen devices (595px and below) */
-@media only screen and (max-width: 595px) and (max-width: 767px){
+@media only screen and (max-width: 767px){
     section {
         width: 50%;
     }
 
-    #first-sec {
-        width: 90vw;
-    }
-
-    #second-sec {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    #box-weather {
-        width: 70vw;
-        flex-direction: column;
-        p {
-            text-align: center;
+    #results {
+        #first-sec {
+            padding: 1em;
+        }
+    
+        #second-sec {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        #box-weather {
+            display: flex;
+            flex-direction: column;
+            min-width: 70%;
+            font-size: 0.8em;
+            p {
+                text-align: center;
+            }
         }
     }
 

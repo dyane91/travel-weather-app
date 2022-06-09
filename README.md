@@ -7,6 +7,7 @@ This project includes a simple form where the user enters the location they are 
 ## Extra implementations
 
 * There are required fields such as departure date and location.
+* An error message is displayed when the location doesn't exist.
 * Return date added to display length of the trip.
 * Pull in an image from Pixabay API when the entered location brings up no results.
 * Instead of just pulling a single day forecast, the app displays the forecast for multiple days. 
